@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun fillData(adapter: SampleAdapter) {
         for (i in 0..10) {
-            adapter.data.add(R.mipmap.ic_launcher)
+            adapter.data.add(R.drawable.test)
             adapter.data.add("I am string")
             adapter.data.add(Title("I am MainTitle"))
             adapter.data.add(Title("", "I am SubTitle"))
