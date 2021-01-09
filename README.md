@@ -110,17 +110,23 @@ class SubTitleCreator : ViewTypeCreator<Title, SubTitleCreator.Holder>() {
 
 * 注册构造器和填充数据:
 ```kotlin
-        val adapter = SampleAdapter()
-        // text type
-        adapter.registerCreator(TextCreator())
-        // the same bean but different view type
-        adapter.registerCreator(MainTitleCreator())
-        adapter.registerCreator(SubTitleCreator())
+        val adapter = SampleAdapter().apply {
+            // image type
+            registerCreator(ImageCreator())
+            // text type
+            registerCreator(TextCreator())
+            // the same bean but different view type
+            registerCreator(MainTitleCreator())
+            registerCreator(SubTitleCreator())
+        }
         // fill data
         for (i in 0..10) {
-            adapter.data.add("I am string")
-            adapter.data.add(Title("I am MainTitle",""))
-            adapter.data.add(Title("", "I am SubTitle"))
+            adapter.data.run {
+                add(R.drawable.test)
+                add("I am string")
+                add(Title("I am MainTitle"))
+                add(Title("", "I am SubTitle"))
+            }
         }
         // recyclerView设置适配器
         recycler_view.adapter = adapter
