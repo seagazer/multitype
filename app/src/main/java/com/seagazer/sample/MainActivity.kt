@@ -19,14 +19,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recycler_view.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        val adapter = SampleAdapter()
-        // image type
-        adapter.registerCreator(ImageCreator())
-        // text type
-        adapter.registerCreator(TextCreator())
-        // the same bean but different view type
-        adapter.registerCreator(MainTitleCreator())
-        adapter.registerCreator(SubTitleCreator())
+        val adapter = SampleAdapter().apply {
+            // image type
+            registerCreator(ImageCreator())
+            // text type
+            registerCreator(TextCreator())
+            // the same bean but different view type
+            registerCreator(MainTitleCreator())
+            registerCreator(SubTitleCreator())
+        }
         fillData(adapter)
         recycler_view.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
@@ -43,10 +44,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun fillData(adapter: SampleAdapter) {
         for (i in 0..10) {
-            adapter.data.add(R.drawable.test)
-            adapter.data.add("I am string")
-            adapter.data.add(Title("I am MainTitle"))
-            adapter.data.add(Title("", "I am SubTitle"))
+            adapter.data.run {
+                add(R.drawable.test)
+                add("I am string")
+                add(Title("I am MainTitle"))
+                add(Title("", "I am SubTitle"))
+            }
         }
     }
 }
